@@ -1,10 +1,11 @@
 import java.util.*;
 import java.io.*;
+import java.util.Random;
 
 
 public class MaxPairwiseProduct {
     public static void main(String[] args) {
-        FastScanner scanner = new FastScanner(System.in); // This line taken from given code in Coursera class
+ /*       FastScanner scanner = new FastScanner(System.in); // This line taken from given code in Coursera class
         int n = scanner.nextInt();
         long[] nums = new long[n];
         for (int i=0; i < nums.length; i++) {
@@ -12,7 +13,8 @@ public class MaxPairwiseProduct {
         }
 //        System.out.println(maxPairwiseProduct(nums));
         System.out.println();
-        System.out.println(maxPairwiseProductFast(nums));
+        System.out.println(maxPairwiseProductFast(nums)); */
+        stressTest();
     }
 
     public static long maxPairwiseProduct(long[] nums) {
@@ -70,4 +72,36 @@ public class MaxPairwiseProduct {
             return Integer.parseInt(next());
         }
     }
+    public static void stressTest() {
+        while (true) {
+            Random r = new Random();
+            int low = 2;
+            int high = 5;
+            int n = r.nextInt((high)) + low;
+
+            long[] randArray = new long[n];
+            for (int i = 0; i < randArray.length; i++) {
+                randArray[i] = r.nextInt(100000);
+            }
+            System.out.println(n);
+            for (int j = 0; j < randArray.length; j++) {
+                System.out.print(randArray[j] + " ");
+            }
+            System.out.println();
+            long slowMethod = maxPairwiseProduct(randArray);
+            long fastMethod = maxPairwiseProductFast(randArray);
+            if (slowMethod != fastMethod) {
+                System.out.print("Wrong answer: " + slowMethod + " " + fastMethod);
+                break;
+            } else {
+                System.out.println("OK");
+                System.out.println();
+            }
+        }
+    }
+ /*   public static void showArr(long[] arr) {
+        for (int j = 0; j < arr.length; j++) {
+            System.out.print(arr[j] + " ");
+        }
+    } */
 }
