@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class MaxPairwiseProduct {
     public static void main(String[] args) {
- /*       FastScanner scanner = new FastScanner(System.in); // This line taken from given code in Coursera class
+        FastScanner scanner = new FastScanner(System.in); // This line taken from given code in Coursera class
         int n = scanner.nextInt();
         long[] nums = new long[n];
         for (int i=0; i < nums.length; i++) {
@@ -13,10 +13,11 @@ public class MaxPairwiseProduct {
         }
 //        System.out.println(maxPairwiseProduct(nums));
         System.out.println();
-        System.out.println(maxPairwiseProductFast(nums)); */
-        stressTest();
+        System.out.println(maxPairwiseProductFast(nums));
+//        stressTest();
     }
 
+// Method is used in stress test for solution
     public static long maxPairwiseProduct(long[] nums) {
         long max = 0;
         for (int i = 0; i < nums.length; i++) {
@@ -28,20 +29,19 @@ public class MaxPairwiseProduct {
     }
 
     public static long maxPairwiseProductFast(long[] nums) {
-        long max = 0;
-        long first = -1;
-        long second = -1;
+        int first = -1;
+        int second = -1;
         for (int i = 0; i < nums.length; i++) {
-            if ((first == -1) || (nums[i] > first)) {
-                first = nums[i];
+            if ((first == -1) || (nums[i] > nums[first])) {
+                first = i;
             }
         }
         for (int j = 0; j < nums.length; j++) {
-            if ((nums[j] != first) && ((second == -1) || (nums[j] > second))) {
-                second = nums[j];
+            if ((j != first) && ((second == -1) || (nums[j] > nums[second]))) {
+                second = j;
             }
         }
-        return  first * second;
+        return  nums[first] * nums[second];
     }
 
 //Code for FastScanner provided by Coursera Algorithmic Toolbox course
@@ -72,11 +72,12 @@ public class MaxPairwiseProduct {
             return Integer.parseInt(next());
         }
     }
-    public static void stressTest() {
+// Method used to test two solutions against each other
+ /*   public static void stressTest() {
         while (true) {
             Random r = new Random();
             int low = 2;
-            int high = 5;
+            int high = 1000;
             int n = r.nextInt((high)) + low;
 
             long[] randArray = new long[n];
@@ -97,11 +98,6 @@ public class MaxPairwiseProduct {
                 System.out.println("OK");
                 System.out.println();
             }
-        }
-    }
- /*   public static void showArr(long[] arr) {
-        for (int j = 0; j < arr.length; j++) {
-            System.out.print(arr[j] + " ");
         }
     } */
 }
